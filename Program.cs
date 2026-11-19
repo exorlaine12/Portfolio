@@ -4,7 +4,8 @@ using portfolio.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
-var connectionString = builder.Configuration.GetConnectionString("Portfolio");
+var connectionString =
+    builder.Configuration.GetConnectionString("Portfolio");
 if (string.IsNullOrWhiteSpace(connectionString))
     throw new InvalidOperationException(
         "Connection string 'Portfolio' is missing. Configure it with User Secrets.");

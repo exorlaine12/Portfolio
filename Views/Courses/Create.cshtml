@@ -1,0 +1,19 @@
+﻿@model portfolio.Models.Course
+@{
+    ViewData["Title"] = ViewContext.RouteData.Values["action"]?.ToString() == "Edit" ? "Edit Course" : "Add Course";
+}
+<section class="container section-block form-wrap">
+    <p class="eyebrow">COURSE DETAILS</p><h1>@ViewData["Title"]</h1>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="CourseId" />
+        <div class="mb-3"><label asp-for="Code" class="form-label"></label><input asp-for="Code" class="form-control" placeholder="e.g. DBMWEB1" /><span asp-validation-for="Code" class="text-danger"></span></div>
+        <div class="mb-3"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+        <div class="row"><div class="col-md-6 mb-3"><label asp-for="Semester" class="form-label"></label><input asp-for="Semester" class="form-control" /></div><div class="col-md-6 mb-3"><label asp-for="AcademicYear" class="form-label"></label><input asp-for="AcademicYear" class="form-control" placeholder="2026-2027" /></div></div>
+        <div class="mb-4"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" class="form-control" rows="4"></textarea></div>
+        <button class="btn btn-primary-custom">Save course</button> <a class="btn btn-outline-custom" asp-action="Index">Cancel</a>
+    </form>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

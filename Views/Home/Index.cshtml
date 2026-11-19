@@ -1,8 +1,39 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<portfolio.Models.Project>
+@{
+    ViewData["Title"] = "Home";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero-section">
+    <div class="container hero-grid">
+        <div>
+            <p class="eyebrow">WELCOME TO MY CREATIVE SPACE</p>
+            <h1>Turning ideas into <span>meaningful projects.</span></h1>
+            <p class="hero-copy">A collection of my academic journey, skills, and projects — thoughtfully created one step at a time.</p>
+            <div class="d-flex flex-wrap gap-3 mt-4">
+                <a class="btn btn-primary-custom" asp-controller="Projects" asp-action="Index">Explore my work <span>↗</span></a>
+                <a class="btn btn-outline-custom" asp-controller="Courses" asp-action="Index">View courses</a>
+            </div>
+            <div class="hero-stats">
+                <div><strong>@Model.Count</strong><span>Projects</span></div>
+                <div><strong>@ViewBag.CourseCount</strong><span>Courses</span></div>
+                <div><strong>∞</strong><span>Ideas to explore</span></div>
+            </div>
+        </div>
+        <div class="hero-art"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-center">✦</div><span class="floating-note note-one">CREATE</span><span class="floating-note note-two">LEARN</span><span class="floating-note note-three">GROW</span></div>
+    </div>
+</section>
+<section class="section-block container">
+    <div class="section-heading"><div><p class="eyebrow">SELECTED WORK</p><h2>Featured projects</h2></div><a class="text-link" asp-controller="Projects" asp-action="Index">View all projects ↗</a></div>
+    @if (Model.Count == 0) { <div class="empty-state">No projects yet. Add your first project from the Projects page.</div> }
+    else {
+        <div class="row g-4">
+        @foreach (var project in Model.Take(3)) {
+            <div class="col-md-6 col-lg-4"><article class="project-card">
+                <div class="project-placeholder">✧<small>@project.CourseCode</small></div>
+                <div class="project-card-body"><p class="card-kicker">@project.CourseName</p><h3>@project.Title</h3><p>@(string.IsNullOrWhiteSpace(project.Description) ? "A project from my learning journey." : project.Description)</p>
+                @if (!string.IsNullOrWhiteSpace(project.VideoUrl)) { <a href="@project.VideoUrl" target="_blank" rel="noopener">Watch video ↗</a> }
+                </div>
+            </article></div>
+        }
+        </div>
+    }
+</section>

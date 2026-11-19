@@ -1,0 +1,7 @@
+﻿@model List<portfolio.Models.Project>
+@{ ViewData["Title"] = "Projects"; }
+<section class="page-banner"><div class="container"><p class="eyebrow">WHAT I'VE BEEN CREATING</p><h1>Projects</h1><p>Experiments, coursework, and ideas brought to life.</p></div></section>
+<section class="container section-block"><div class="section-heading"><h2>All projects</h2><a class="btn btn-primary-custom" asp-action="Create">+ Add project</a></div>
+@if (!Model.Any()) { <div class="empty-state">No projects yet. Add your first project.</div> }
+else { <div class="row g-4">@foreach (var p in Model) { <div class="col-md-6 col-lg-4"><article class="project-card"><div class="project-placeholder">✧<small>@p.CourseCode</small></div><div class="project-card-body"><p class="card-kicker">@p.CourseName</p><h3>@p.Title</h3><p>@p.Description</p>@if (p.CompletedDate.HasValue) { <p class="muted-small">Completed: @p.CompletedDate.Value.ToString("MMM dd, yyyy")</p> }<div class="d-flex gap-2 flex-wrap">@if (!string.IsNullOrWhiteSpace(p.VideoUrl)) { <a class="btn btn-sm btn-light" href="@p.VideoUrl" target="_blank" rel="noopener">Video ↗</a> }<a class="btn btn-sm btn-light" asp-action="Edit" asp-route-id="@p.ProjectId">Edit</a><form asp-action="Delete" asp-route-id="@p.ProjectId" method="post" onsubmit="return confirm('Delete this project and its images?');"><button class="btn btn-sm btn-outline-danger">Delete</button></form></div></div></article></div> }</div> }
+</section>

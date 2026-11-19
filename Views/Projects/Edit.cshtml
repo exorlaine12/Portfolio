@@ -1,0 +1,14 @@
+﻿@model portfolio.Models.Project
+@{ ViewData["Title"] = ViewContext.RouteData.Values["action"]?.ToString() == "Edit" ? "Edit Project" : "Add Project"; }
+<section class="container section-block form-wrap"><p class="eyebrow">PROJECT DETAILS</p><h1>@ViewData["Title"]</h1>
+<form method="post">
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<input type="hidden" asp-for="ProjectId" />
+<div class="mb-3"><label asp-for="CourseId" class="form-label">Course</label><select asp-for="CourseId" asp-items="ViewBag.Courses" class="form-select"><option value="">-- Select course --</option></select><span asp-validation-for="CourseId" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Title" class="form-label"></label><input asp-for="Title" class="form-control" /><span asp-validation-for="Title" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" class="form-control" rows="5"></textarea></div>
+<div class="row"><div class="col-md-6 mb-3"><label asp-for="CompletedDate" class="form-label"></label><input asp-for="CompletedDate" type="date" class="form-control" /></div><div class="col-md-6 mb-3"><label asp-for="VideoUrl" class="form-label"></label><input asp-for="VideoUrl" class="form-control" placeholder="https://www.youtube.com/watch?v=..." /><span asp-validation-for="VideoUrl" class="text-danger"></span></div></div>
+<div class="mb-4"><label asp-for="ImageUrls" class="form-label"></label><textarea asp-for="ImageUrls" class="form-control" rows="4" placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea><div class="form-text">Enter one public image URL per line. Saving edits replaces the project's current image URL list.</div></div>
+<button class="btn btn-primary-custom">Save project</button> <a class="btn btn-outline-custom" asp-action="Index">Cancel</a>
+</form></section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

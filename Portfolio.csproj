@@ -7,4 +7,9 @@
     <UserSecretsId>5bfe7e24-027d-4e33-90c2-d5ec1cdfe7a0</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
+  </ItemGroup>
+
 </Project>
